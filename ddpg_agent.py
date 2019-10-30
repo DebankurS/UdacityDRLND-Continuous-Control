@@ -17,7 +17,7 @@ LR_ACTOR = 2e-4         # learning rate of the actor
 LR_CRITIC = 2e-4        # learning rate of the critic
 WEIGHT_DECAY = 0        # L2 weight decay
 UPDATE_EVERY=20
-NUM_UPDATES=5
+NUM_UPDATES=10
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -70,7 +70,7 @@ class Agent():
                     self.learn(experiences, GAMMA)
 
     def act(self, state, add_noise=True):
-        """Returns actions for given state as per current policy."""
+        """Returns actions for given state as per current policy and updates the timestep"""
         self.t_step+=1
         state = torch.from_numpy(state).float().to(device)
         self.actor_local.eval()
